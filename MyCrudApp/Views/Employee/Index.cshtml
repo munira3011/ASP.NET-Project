@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Index";
+ }
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#addEmp">Register Employee</a></li>
+    <li><a data-toggle="tab" href="#viewEmp">View Employee</a></li>
+</ul>
+    <div class="tab-content">
+        <div id="addEmp" class="tab-pane fade in active">@Html.Action("AddOrUpdateEmployee")</div>
+        <div id="viewEmp" class="tab-pane fade in">@Html.Action("viewAllEmployees")</div>
+    </div>
+
+@section scripts{
+        @Scripts.Render("~/bundles/jqueryval")
+    }

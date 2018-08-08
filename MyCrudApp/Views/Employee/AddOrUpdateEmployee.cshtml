@@ -1,0 +1,60 @@
+﻿@model MyCrudApp.Models.Employee
+
+@{
+    ViewBag.Title = "AddOrUpdateEmployee";
+    Layout = null;
+}
+
+
+@using (Html.BeginForm("AddOrUpdateEmployee", "Employee", FormMethod.Post, new { onSubmit = "return addEmployeeData(this);"}))
+{
+    @Html.ValidationSummary(true)
+
+    
+       
+    <form class="myForm">
+        @Html.HiddenFor(model => model.empid)
+        <div class="form-row col-md-8" style="padding-top:20px">
+       <div class="form-group">
+            <div class="col-md-4">
+                Employee Name
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.name, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div><br /><br />
+        <div class="form-group">
+            <div class="col-md-4">
+                Employee Salary
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.salary, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.salary)
+            </div>
+        </div><br /><br />
+
+        <div class="form-group">
+             <div class="col-md-4">
+                Work Department
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.department, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.department)
+            </div>
+        </div>   <br /><br />
+        <div class="form-group">     
+       <div class="col-md-4">
+
+           <input class="btn btn-primary" type="submit" value="ADD EMPLOYEE" />
+       </div>
+        </div>
+       </div> 
+        </form>
+    
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

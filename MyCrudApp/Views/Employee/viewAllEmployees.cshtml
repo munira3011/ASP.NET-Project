@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MyCrudApp.Models.Employee>
+
+@{
+    ViewBag.Title = "viewAllEmployees";
+    Layout = null;
+}
+
+<table class="table table-striped table-responsive">
+     <thead class="thead-dark">
+        <tr>
+        
+        <th>
+            Name
+        </th>
+        <th>
+            Salary
+        </th>
+        <th>
+            Department
+        </th>
+        </tr>
+     </thead>
+    
+
+@foreach (var item in Model) {
+    <tr>
+        
+           @Html.HiddenFor(modelItem => item.empid)
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.department)
+        </td>
+        <td>
+           <a class="btn btn-primary btn-sm"
+                onclick="Edit('@Url.Action("AddOrUpdateEmployee", "Employee", new { id = @item.empid })')">Edit</a>
+            <a class="btn btn-danger btn-sm" 
+                onclick="Delete('@Url.Action("DeleteEmployee", "Employee", new { empid = @item.empid })')">Delete</a>
+        </td>
+    </tr>
+}
+</table>
+<script>
+function Edit(url) {
+   
+        $.ajax({
+            type: 'GET',
+            url: url,
+           
+            success: function (response) {
+                $('#addEmp').html(response);
+                $('ul.nav.nav-tabs a:eq(0)').html('Update');
+                $('ul.nav.nav-tabs a:eq(0)').tab('show');
+            }
+
+        });
+        
+    
+}
+
+function Delete(url) {
+   
+    if (confirm('Are you sure you want to delete??') == true) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            success: function (response) {
+                $('#viewEmp').html(response);
+               
+                //$('ul.nav.nav-tabs a:eq(1)').tab('show');
+            }
+
+        });
+
+    }
+}
+</script>
